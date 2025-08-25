@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <div class="wizard-header">
-  <h2>OMNICheck PostgreSQL Installation Wizard</h2>
-  <img src="Images/logo.png" alt="Company Logo" class="logo-inline">
-</div>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OMNICheck PostgreSQL Installation Wizard</title>
@@ -22,12 +18,13 @@
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       padding: 30px;
-      position: realtive;
+      position: relative; /* fixed typo */
     }
-     .wizard-header {
+    .wizard-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 20px;
     }
     .logo-inline {
       height: 40px;
@@ -98,6 +95,12 @@
 </head>
 <body>
   <div class="wizard">
+    <!-- Header with logo -->
+    <div class="wizard-header">
+      <h2>OMNICheck PostgreSQL Installation Wizard</h2>
+      <img src="Images/logo.png" alt="Company Logo" class="logo-inline">
+    </div>
+
     <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
 
     <!-- Step 1: Starting the Installer -->
@@ -124,7 +127,7 @@
         <li>Port: <b>5432</b>.</li>
       </ul>
       <div class="screenshot">
-        <img src=Images/2.png alt="PostgreSQL Installation Wizard" style="max-height:100%; max-width:100%;">
+        <img src="Images/2.png" alt="PostgreSQL Installation Wizard" style="max-height:100%; max-width:100%;">
       </div>
     </div>
 
@@ -141,7 +144,9 @@
           User: Admin / Pass
         </li>
       </ul>
-      <div class="screenshot">pgAdmin Server Registration Screenshot</div>
+      <div class="screenshot">
+        <img src="Images/3.png" alt="pgAdmin Server Registration" style="max-height:100%; max-width:100%;">
+      </div>
     </div>
 
     <!-- Step 4: Create Default Database -->
@@ -152,7 +157,9 @@
         <li>Right-click → Create → Database.</li>
         <li>Name it <b>postgres</b>.</li>
       </ul>
-      <div class="screenshot">Database Creation Screenshot</div>
+      <div class="screenshot">
+        <img src="Images/4.png" alt="Database Creation Screenshot" style="max-height:100%; max-width:100%;">
+      </div>
     </div>
 
     <!-- Step 5: Install pgAdmin -->
@@ -163,7 +170,9 @@
         <li>Follow setup wizard.</li>
         <li>Verify OMNICheck Server appears.</li>
       </ul>
-      <div class="screenshot">pgAdmin Main Window Screenshot</div>
+      <div class="screenshot">
+        <img src="Images/5.png" alt="pgAdmin Main Window Screenshot" style="max-height:100%; max-width:100%;">
+      </div>
     </div>
 
     <!-- Step 6: Install ODBC Driver -->
@@ -173,7 +182,9 @@
         <li>Run installer <b>PostgreSQL Unicode (x64)</b>.</li>
         <li>Verify installation via ODBC Data Sources.</li>
       </ul>
-      <div class="screenshot">ODBC Data Source Screenshot</div>
+      <div class="screenshot">
+        <img src="Images/6.png" alt="ODBC Data Source Screenshot" style="max-height:100%; max-width:100%;">
+      </div>
     </div>
 
     <!-- Step 7: Verify Installation -->
@@ -185,7 +196,9 @@
         <li>Run: <code>SELECT version();</code></li>
         <li>Confirm database <b>postgres</b> exists.</li>
       </ul>
-      <div class="screenshot">Query Tool Output Screenshot</div>
+      <div class="screenshot">
+        <img src="Images/7.png" alt="Query Tool Output Screenshot" style="max-height:100%; max-width:100%;">
+      </div>
     </div>
 
     <!-- Step 8: Completion -->
@@ -198,7 +211,9 @@
         <li>Database: postgres</li>
         <li>pgAdmin + ODBC Driver installed</li>
       </ul>
-      <div class="screenshot">Success Confirmation Screenshot</div>
+      <div class="screenshot">
+        <img src="Images/8.png" alt="Success Confirmation Screenshot" style="max-height:100%; max-width:100%;">
+      </div>
     </div>
 
     <!-- Navigation -->

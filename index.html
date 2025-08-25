@@ -64,6 +64,10 @@
     button.prev {
       background: #ccc;
     }
+    button.done {
+      background: #28a745;
+      color: white;
+    }
     .progress {
       margin-bottom: 20px;
       height: 8px;
@@ -83,31 +87,40 @@
   <div class="wizard">
     <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
 
-    <!-- Step 1 -->
+    <!-- Step 1: Starting the Installer -->
     <div class="step active">
-      <h2>Welcome to OMNICheck PostgreSQL Installation</h2>
-      <p>This wizard will guide you through installing and configuring PostgreSQL, pgAdmin, and the ODBC driver.</p>
-      <div class="screenshot">Welcome Screen Placeholder</div>
-    </div>
-
-    <!-- Step 2 -->
-    <div class="step">
-      <h2>Step 1: Install PostgreSQL</h2>
+      <h2>Step 1: Starting the Installer</h2>
       <ul>
-        <li>Run <b>postgresql-x64.exe</b></li>
-        <li>Choose install directory (default: C:\Program Files\PostgreSQL\10\)</li>
-        <li>Set username: <b>Admin</b>, password: <b>Pass</b></li>
-        <li>Port: <b>5432</b></li>
+        <li>Navigate to the folder where the PostgreSQL installer <b>postgresql-x64.exe</b> was saved.</li>
+        <li>Double-click the installer to launch it.</li>
+        <li>The installer may first run a <b>Microsoft Visual C++ Redistributable</b> precheck and install.</li>
       </ul>
-      <div class="screenshot">PostgreSQL Installer Screenshot</div>
+      <div class="screenshot">
+        <img src="images/step4_installer_start.png" alt="PostgreSQL Installer Starting" style="max-height:100%; max-width:100%;">
+      </div>
     </div>
 
-    <!-- Step 3 -->
+    <!-- Step 2: Install PostgreSQL -->
     <div class="step">
-      <h2>Step 2: Configure OMNICheck Server</h2>
+      <h2>Step 2: Install PostgreSQL</h2>
       <ul>
-        <li>Open <b>pgAdmin</b></li>
-        <li>Create master password</li>
+        <li>Run through the setup wizard.</li>
+        <li>Choose install directory (default: C:\Program Files\PostgreSQL\10\).</li>
+        <li>Keep pgAdmin checked for installation.</li>
+        <li>Set username: <b>Admin</b>, password: <b>Pass</b>.</li>
+        <li>Port: <b>5432</b>.</li>
+      </ul>
+      <div class="screenshot">
+        <img src="images/step5_installer_wizard.png" alt="PostgreSQL Installation Wizard" style="max-height:100%; max-width:100%;">
+      </div>
+    </div>
+
+    <!-- Step 3: Configure OMNICheck Server -->
+    <div class="step">
+      <h2>Step 3: Configure OMNICheck Server</h2>
+      <ul>
+        <li>Open <b>pgAdmin</b>.</li>
+        <li>Create master password.</li>
         <li>Register server:<br>
           Name: OMNICheck Server<br>
           Host: localhost<br>
@@ -118,51 +131,51 @@
       <div class="screenshot">pgAdmin Server Registration Screenshot</div>
     </div>
 
-    <!-- Step 4 -->
+    <!-- Step 4: Create Default Database -->
     <div class="step">
-      <h2>Step 3: Create Default Database</h2>
+      <h2>Step 4: Create Default Database</h2>
       <ul>
-        <li>In pgAdmin, expand OMNICheck Server → Databases</li>
-        <li>Right-click → Create → Database</li>
-        <li>Name it <b>postgres</b></li>
+        <li>In pgAdmin, expand OMNICheck Server → Databases.</li>
+        <li>Right-click → Create → Database.</li>
+        <li>Name it <b>postgres</b>.</li>
       </ul>
       <div class="screenshot">Database Creation Screenshot</div>
     </div>
 
-    <!-- Step 5 -->
+    <!-- Step 5: Install pgAdmin -->
     <div class="step">
-      <h2>Step 4: Install pgAdmin</h2>
+      <h2>Step 5: Install pgAdmin</h2>
       <ul>
-        <li>Run installer <b>pgadmin4-x64.exe</b></li>
-        <li>Follow setup wizard</li>
-        <li>Verify OMNICheck Server appears</li>
+        <li>Run installer <b>pgadmin4-x64.exe</b>.</li>
+        <li>Follow setup wizard.</li>
+        <li>Verify OMNICheck Server appears.</li>
       </ul>
       <div class="screenshot">pgAdmin Main Window Screenshot</div>
     </div>
 
-    <!-- Step 6 -->
+    <!-- Step 6: Install ODBC Driver -->
     <div class="step">
-      <h2>Step 5: Install ODBC Driver</h2>
+      <h2>Step 6: Install ODBC Driver</h2>
       <ul>
-        <li>Run installer <b>PostgreSQL Unicode (x64)</b></li>
-        <li>Verify installation via ODBC Data Sources</li>
+        <li>Run installer <b>PostgreSQL Unicode (x64)</b>.</li>
+        <li>Verify installation via ODBC Data Sources.</li>
       </ul>
       <div class="screenshot">ODBC Data Source Screenshot</div>
     </div>
 
-    <!-- Step 7 -->
+    <!-- Step 7: Verify Installation -->
     <div class="step">
-      <h2>Step 6: Verify Installation</h2>
+      <h2>Step 7: Verify Installation</h2>
       <ul>
-        <li>Launch pgAdmin and connect to OMNICheck Server</li>
-        <li>Open Query Tool</li>
+        <li>Launch pgAdmin and connect to OMNICheck Server.</li>
+        <li>Open Query Tool.</li>
         <li>Run: <code>SELECT version();</code></li>
-        <li>Confirm database <b>postgres</b> exists</li>
+        <li>Confirm database <b>postgres</b> exists.</li>
       </ul>
       <div class="screenshot">Query Tool Output Screenshot</div>
     </div>
 
-    <!-- Step 8 -->
+    <!-- Step 8: Completion -->
     <div class="step">
       <h2>Installation Complete 🎉</h2>
       <p>You now have PostgreSQL installed with:</p>
@@ -178,7 +191,7 @@
     <!-- Navigation -->
     <div class="nav-buttons">
       <button class="prev" onclick="prevStep()">Previous</button>
-      <button class="next" onclick="nextStep()">Next</button>
+      <button class="next" id="nextBtn" onclick="nextStep()">Next</button>
     </div>
   </div>
 
@@ -186,10 +199,24 @@
     let currentStep = 0;
     const steps = document.querySelectorAll(".step");
     const progress = document.getElementById("progressBar");
+    const nextBtn = document.getElementById("nextBtn");
 
     function showStep(n) {
       steps.forEach((step, i) => step.classList.toggle("active", i === n));
       progress.style.width = ((n+1)/steps.length)*100 + "%";
+
+      // Change Next button to Done on last step
+      if (n === steps.length - 1) {
+        nextBtn.textContent = "Done";
+        nextBtn.classList.remove("next");
+        nextBtn.classList.add("done");
+        nextBtn.onclick = () => alert("Installation walkthrough complete!");
+      } else {
+        nextBtn.textContent = "Next";
+        nextBtn.classList.add("next");
+        nextBtn.classList.remove("done");
+        nextBtn.onclick = nextStep;
+      }
     }
 
     function nextStep() {

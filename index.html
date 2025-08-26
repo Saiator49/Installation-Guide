@@ -18,7 +18,7 @@
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       padding: 30px;
-      position: relative; /* fixed typo */
+      position: relative;
     }
     .wizard-header {
       display: flex;
@@ -27,7 +27,7 @@
       margin-bottom: 20px;
     }
     .logo-inline {
-      height: 100px;
+      height: 60px; /* logo bigger */
     }
     .step {
       display: none;
@@ -61,18 +61,28 @@
       margin-top: 20px;
     }
     button {
-      padding: 10px 20px;
+      padding: 12px 28px;
       font-size: 16px;
       border: none;
-      border-radius: 8px;
+      border-radius: 50px; /* pill style */
       cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
     }
     button.next {
-      background: #0078d7;
+      background: linear-gradient(135deg, #0078d7, #005bb5);
       color: white;
     }
+    button.next:hover {
+      transform: scale(1.05);
+    }
     button.prev {
-      background: #ccc;
+      background: transparent;
+      color: #0078d7;
+      border: 2px solid #0078d7;
+    }
+    button.prev:hover {
+      background: #0078d7;
+      color: white;
     }
     button.done {
       background: #28a745;
@@ -98,7 +108,7 @@
     <!-- Header with logo -->
     <div class="wizard-header">
       <h2>OMNICheck PostgreSQL Installation Wizard</h2>
-      <img src="Images/logo.jpg" alt="Company Logo" class="logo-inline">
+      <img src="Images/logo.png" alt="Company Logo" class="logo-inline">
     </div>
 
     <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
@@ -131,9 +141,22 @@
       </div>
     </div>
 
-    <!-- Step 3: Configure OMNICheck Server -->
+    <!-- Step 3: Install pgAdmin -->
     <div class="step">
-      <h2>Step 3: Configure OMNICheck Server</h2>
+      <h2>Step 3: Install pgAdmin</h2>
+      <ul>
+        <li>Run installer <b>pgadmin4-x64.exe</b>.</li>
+        <li>Follow setup wizard.</li>
+        <li>Verify OMNICheck Server appears.</li>
+      </ul>
+      <div class="screenshot">
+        <img src="Images/3.png" alt="pgAdmin Main Window Screenshot" style="max-height:100%; max-width:100%;">
+      </div>
+    </div>
+
+    <!-- Step 4: Configure OMNICheck Server -->
+    <div class="step">
+      <h2>Step 4: Configure OMNICheck Server</h2>
       <ul>
         <li>Open <b>pgAdmin</b>.</li>
         <li>Create master password.</li>
@@ -145,33 +168,20 @@
         </li>
       </ul>
       <div class="screenshot">
-        <img src="Images/3.png" alt="pgAdmin Server Registration" style="max-height:100%; max-width:100%;">
+        <img src="Images/4.png" alt="pgAdmin Server Registration" style="max-height:100%; max-width:100%;">
       </div>
     </div>
 
-    <!-- Step 4: Create Default Database -->
+    <!-- Step 5: Create Default Database -->
     <div class="step">
-      <h2>Step 4: Create Default Database</h2>
+      <h2>Step 5: Create Default Database</h2>
       <ul>
         <li>In pgAdmin, expand OMNICheck Server → Databases.</li>
         <li>Right-click → Create → Database.</li>
         <li>Name it <b>postgres</b>.</li>
       </ul>
       <div class="screenshot">
-        <img src="Images/4.png" alt="Database Creation Screenshot" style="max-height:100%; max-width:100%;">
-      </div>
-    </div>
-
-    <!-- Step 5: Install pgAdmin -->
-    <div class="step">
-      <h2>Step 5: Install pgAdmin</h2>
-      <ul>
-        <li>Run installer <b>pgadmin4-x64.exe</b>.</li>
-        <li>Follow setup wizard.</li>
-        <li>Verify OMNICheck Server appears.</li>
-      </ul>
-      <div class="screenshot">
-        <img src="Images/5.png" alt="pgAdmin Main Window Screenshot" style="max-height:100%; max-width:100%;">
+        <img src="Images/5.png" alt="Database Creation Screenshot" style="max-height:100%; max-width:100%;">
       </div>
     </div>
 

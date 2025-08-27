@@ -3,228 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OMNICheck PostgreSQL Installation Wizard</title>
+  <title>OMNICheck Database Installation Wizard</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f9f9fb;
-      color: #333;
-    }
-    .wizard {
-      max-width: 800px;
-      margin: 50px auto;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      padding: 30px;
-      position: relative;
-    }
-    .wizard-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .logo-inline {
-      height: 60px; /* logo bigger */
-    }
-    .step {
-      display: none;
-      animation: fadeIn 0.4s;
-    }
-    .step.active {
-      display: block;
-    }
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-    h2 {
-      margin-top: 0;
-    }
-    .screenshot {
-      width: 100%;
-      height: 300px;
-      background: #ddd;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #666;
-      font-size: 18px;
-      margin: 20px 0;
-    }
-    .nav-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    button {
-      padding: 12px 28px;
-      font-size: 16px;
-      border: none;
-      border-radius: 50px; /* pill style */
-      cursor: pointer;
-      transition: transform 0.2s, background 0.3s;
-    }
-    button.next {
-      background: linear-gradient(135deg, #0078d7, #005bb5);
-      color: white;
-    }
-    button.next:hover {
-      transform: scale(1.05);
-    }
-    button.prev {
-      background: transparent;
-      color: #0078d7;
-      border: 2px solid #0078d7;
-    }
-    button.prev:hover {
-      background: #0078d7;
-      color: white;
-    }
-    button.done {
-      background: #28a745;
-      color: white;
-    }
-    .progress {
-      margin-bottom: 20px;
-      height: 8px;
-      background: #eee;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .progress-bar {
-      height: 8px;
-      background: #0078d7;
-      width: 0;
-      transition: width 0.3s;
-    }
+    body { font-family: Arial, sans-serif; margin:0; background:#f9f9fb; color:#333; }
+    .wizard { max-width:800px; margin:40px auto; background:#fff; padding:30px; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.1); }
+    .wizard-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+    .logo-inline { height:60px; }
+    .step { display:none; animation:fadeIn 0.4s; }
+    .step.active { display:block; }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    .screenshot { width:100%; background:#ddd; border-radius:8px; display:flex; align-items:center; justify-content:center; margin:20px 0; }
+    .screenshot img { max-width:100%; max-height:350px; border-radius:8px; }
+    .nav-buttons { display:flex; justify-content:space-between; margin-top:20px; }
+    button { padding:12px 28px; font-size:16px; border:none; border-radius:50px; cursor:pointer; transition:transform .2s, background .3s; }
+    button.next { background:linear-gradient(135deg, #0078d7, #005bb5); color:white; }
+    button.next:hover { transform:scale(1.05); }
+    button.prev { background:transparent; color:#0078d7; border:2px solid #0078d7; }
+    button.prev:hover { background:#0078d7; color:white; }
+    button.done { background:#28a745; color:white; }
+    .progress { height:8px; background:#eee; border-radius:4px; margin-bottom:20px; }
+    .progress-bar { height:8px; background:#0078d7; width:0; transition:width .3s; }
   </style>
 </head>
 <body>
   <div class="wizard">
     <!-- Header with logo -->
     <div class="wizard-header">
-      <h2>OMNICheck PostgreSQL Installation Wizard</h2>
-      <img src="Images/logo.jpg" alt="Company Logo" class="logo-inline">
+      <h2>OMNICheck Database Installation Wizard</h2>
+      <img src="screenshots/logo.png" alt="Company Logo" class="logo-inline">
     </div>
 
     <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
 
-    <!-- Step 1: Starting the Installer -->
-    <div class="step active">
-      <h2>Step 1: Starting the Installer</h2>
-      <ul>
-        <li>Navigate to the folder where the PostgreSQL installer <b>postgresql-x64.exe</b> was saved.</li>
-        <li>Double-click the installer to launch it.</li>
-        <li>The installer may first run a <b>Microsoft Visual C++ Redistributable</b> precheck and install.</li>
-      </ul>
-      <div class="screenshot">
-        <img src="Images/1.png" alt="PostgreSQL Installer Starting" style="max-height:100%; max-width:100%;">
-      </div>
-    </div>
+    <!-- PostgreSQL Steps -->
+    <div class="step active"><h2>Step 1: Start PostgreSQL Installer</h2>
+      <p>Double-click the PostgreSQL installer file. Click <b>Next</b> to continue.</p>
+      <div class="screenshot"><img src="screenshots/step1.png" alt="Installer Welcome"></div></div>
 
-    <!-- Step 2: Install PostgreSQL -->
-    <div class="step">
-      <h2>Step 2: Install PostgreSQL</h2>
-      <ul>
-        <li>Run through the setup wizard.</li>
-        <li>Choose install directory (default: C:\Program Files\PostgreSQL\10\).</li>
-        <li>Keep pgAdmin checked for installation.</li>
-        <li>Set username: <b>Admin</b>, password: <b>Pass</b>.</li>
-        <li>Port: <b>5432</b>.</li>
-      </ul>
-      <div class="screenshot">
-        <img src="Images/2.png" alt="PostgreSQL Installation Wizard" style="max-height:100%; max-width:100%;">
-      </div>
-    </div>
+    <div class="step"><h2>Step 2: Installation Directory</h2>
+      <p>Choose where PostgreSQL will be installed (default recommended). Click <b>Next</b>.</p>
+      <div class="screenshot"><img src="screenshots/step2.png" alt="Installation Directory"></div></div>
 
-    <!-- Step 3: Install pgAdmin -->
-    <div class="step">
-      <h2>Step 3: Install pgAdmin</h2>
-      <ul>
-        <li>Run installer <b>pgadmin4-x64.exe</b>.</li>
-        <li>Follow setup wizard.</li>
-        <li>Verify OMNICheck Server appears.</li>
-      </ul>
-      <div class="screenshot">
-        <img src="Images/3.png" alt="pgAdmin Main Window Screenshot" style="max-height:100%; max-width:100%;">
-      </div>
-    </div>
+    <div class="step"><h2>Step 3: Select Components</h2>
+      <p>Keep defaults (Server, pgAdmin, Command Line Tools). Click <b>Next</b>.</p>
+      <div class="screenshot"><img src="screenshots/step3.png" alt="Components"></div></div>
 
-    <!-- Step 4: Configure OMNICheck Server -->
-    <div class="step">
-      <h2>Step 4: Configure OMNICheck Server</h2>
-      <ul>
-        <li>Open <b>pgAdmin</b>.</li>
-        <li>Create master password.</li>
-        <li>Register server:<br>
-          Name: OMNICheck Server<br>
-          Host: localhost<br>
-          Port: 5432<br>
-          User: Admin / Pass
-        </li>
-      </ul>
-      <div class="screenshot">
-        <img src="Images/4.png" alt="pgAdmin Server Registration" style="max-height:100%; max-width:100%;">
-      </div>
-    </div>
+    <div class="step"><h2>Step 4: Data Directory</h2>
+      <p>Choose where to store database data. Default is recommended. Click <b>Next</b>.</p>
+      <div class="screenshot"><img src="screenshots/step4.png" alt="Data Directory"></div></div>
 
-    <!-- Step 5: Create Default Database -->
-    <div class="step">
-      <h2>Step 5: Create Default Database</h2>
-      <ul>
-        <li>In pgAdmin, expand OMNICheck Server → Databases.</li>
-        <li>Right-click → Create → Database.</li>
-        <li>Name it <b>postgres</b>.</li>
-      </ul>
-      <div class="screenshot">
-        <img src="Images/5.png" alt="Database Creation Screenshot" style="max-height:100%; max-width:100%;">
-      </div>
-    </div>
+    <div class="step"><h2>Step 5: Superuser Password</h2>
+      <p>Enter a password for the PostgreSQL superuser <b>postgres</b>. Remember this for later use.</p>
+      <div class="screenshot"><img src="screenshots/step5.png" alt="Password"></div></div>
 
-    <!-- Step 6: Install ODBC Driver -->
-    <div class="step">
-      <h2>Step 6: Install ODBC Driver</h2>
-      <ul>
-        <li>Run installer <b>PostgreSQL Unicode (x64)</b>.</li>
-        <li>Verify installation via ODBC Data Sources.</li>
-      </ul>
-      <div class="screenshot">
-        <img src="Images/6.png" alt="ODBC Data Source Screenshot" style="max-height:100%; max-width:100%;">
-      </div>
-    </div>
+    <div class="step"><h2>Step 6: Port Selection</h2>
+      <p>Leave default port as <b>5432</b>. Click <b>Next</b>.</p>
+      <div class="screenshot"><img src="screenshots/step6.png" alt="Port"></div></div>
 
-    <!-- Step 7: Verify Installation -->
-    <div class="step">
-      <h2>Step 7: Verify Installation</h2>
-      <ul>
-        <li>Launch pgAdmin and connect to OMNICheck Server.</li>
-        <li>Open Query Tool.</li>
-        <li>Run: <code>SELECT version();</code></li>
-        <li>Confirm database <b>postgres</b> exists.</li>
-      </ul>
-      <div class="screenshot">
-        <img src="Images/7.png" alt="Query Tool Output Screenshot" style="max-height:100%; max-width:100%;">
-      </div>
-    </div>
+    <div class="step"><h2>Step 7: Locale</h2>
+      <p>Select locale (default recommended). Click <b>Next</b>.</p>
+      <div class="screenshot"><img src="screenshots/step7.png" alt="Locale"></div></div>
 
-    <!-- Step 8: Completion -->
-    <div class="step">
-      <h2>Installation Complete 🎉</h2>
-      <p>You now have PostgreSQL installed with:</p>
+    <div class="step"><h2>Step 8: Pre-Installation Summary</h2>
+      <p>Review your settings. If correct, click <b>Next</b>.</p>
+      <div class="screenshot"><img src="screenshots/step8.png" alt="Summary"></div></div>
+
+    <div class="step"><h2>Step 9: Installing</h2>
+      <p>The installer copies files and configures PostgreSQL. Please wait.</p>
+      <div class="screenshot"><img src="screenshots/step9.png" alt="Installing"></div></div>
+
+    <div class="step"><h2>Step 10: Installation Complete</h2>
+      <p>Click <b>Finish</b> to close the installer.</p>
+      <div class="screenshot"><img src="screenshots/step10.png" alt="Complete"></div></div>
+
+    <!-- pgAdmin -->
+    <div class="step"><h2>Step 11: Install pgAdmin</h2>
+      <p>Run the <b>pgAdmin 4 installer</b>. Accept default options unless required otherwise.</p>
+      <div class="screenshot"><img src="screenshots/pgadmin_install.png" alt="pgAdmin Installer"></div></div>
+
+    <!-- ODBC -->
+    <div class="step"><h2>Step 12: Install ODBC Driver</h2>
+      <p>Run the <b>PostgreSQL Unicode (x64) ODBC driver</b> installer. Verify it appears in ODBC Data Sources.</p>
+      <div class="screenshot"><img src="screenshots/odbc_install.png" alt="ODBC Installer"></div></div>
+
+    <!-- Configure pgAdmin Server -->
+    <div class="step"><h2>Step 13: Configure OMNICheck Server in pgAdmin</h2>
+      <p>Open pgAdmin, add a new server with these details:</p>
       <ul>
-        <li>Server: OMNICheck Server (localhost)</li>
-        <li>User: Admin / Pass</li>
-        <li>Database: postgres</li>
-        <li>pgAdmin + ODBC Driver installed</li>
+        <li>Server name: <b>OMNICheck Server</b></li>
+        <li>Host: <b>localhost</b></li>
+        <li>Port: <b>5432</b></li>
+        <li>User: <b>ator</b></li>
+        <li>Password: <b>Pass</b></li>
       </ul>
-      <div class="screenshot">
-        <img src="Images/8.png" alt="Success Confirmation Screenshot" style="max-height:100%; max-width:100%;">
-      </div>
-    </div>
+      <div class="screenshot"><img src="screenshots/pgadmin_add_server.png" alt="pgAdmin Add Server"></div></div>
+
+    <!-- Verify -->
+    <div class="step"><h2>Step 14: Verify Installation</h2>
+      <p>In pgAdmin Query Tool, run:</p>
+      <pre>SELECT version();</pre>
+      <p>If PostgreSQL responds with version info, setup is complete 🎉</p>
+      <div class="screenshot"><img src="screenshots/verify.png" alt="Verify Installation"></div></div>
 
     <!-- Navigation -->
     <div class="nav-buttons">
@@ -243,12 +122,11 @@
       steps.forEach((step, i) => step.classList.toggle("active", i === n));
       progress.style.width = ((n+1)/steps.length)*100 + "%";
 
-      // Change Next button to Done on last step
       if (n === steps.length - 1) {
         nextBtn.textContent = "Done";
         nextBtn.classList.remove("next");
         nextBtn.classList.add("done");
-        nextBtn.onclick = () => alert("Installation walkthrough complete!");
+        nextBtn.onclick = () => alert("OMNICheck setup complete!");
       } else {
         nextBtn.textContent = "Next";
         nextBtn.classList.add("next");
@@ -256,21 +134,8 @@
         nextBtn.onclick = nextStep;
       }
     }
-
-    function nextStep() {
-      if (currentStep < steps.length-1) {
-        currentStep++;
-        showStep(currentStep);
-      }
-    }
-
-    function prevStep() {
-      if (currentStep > 0) {
-        currentStep--;
-        showStep(currentStep);
-      }
-    }
-
+    function nextStep() { if (currentStep < steps.length-1) { currentStep++; showStep(currentStep); } }
+    function prevStep() { if (currentStep > 0) { currentStep--; showStep(currentStep); } }
     showStep(currentStep);
   </script>
 </body>
